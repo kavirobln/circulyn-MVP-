@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circulyn - ESPR Compliance Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="bg-white border-b border-gray-200 px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">C</span>
+                        </div>
+                        <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            Circulyn
+                        </h1>
+                    </div>
+                    <div class="flex space-x-6">
+                        <button onclick="showView('dashboard')" class="nav-btn active">Dashboard</button>
+                        <button onclick="showView('products')" class="nav-btn">Produkte</button>
+                        <button onclick="showView('wizard')" class="nav-btn">DPP erstellen</button>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 text-gray-600 hover:text-gray-900">
+                        <i data-lucide="bell" class="w-5 h-5"></i>
+                    </button>
+                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                        <span class="text-white text-sm font-medium">MH</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Dashboard View -->
+        <div id="dashboard-view" class="p-6 space-y-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900">Willkommen bei Circulyn</h2>
+                    <p class="text-gray-600 mt-2">Ihr ESPR-konformes Digital Product Passport System</p>
+                </div>
+                <button onclick="showView('wizard')" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 flex items-center space-x-2">
+                    <i data-lucide="plus" class="w-5 h-5"></i>
+                    <span>Neuer DPP</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">Aktive DPPs</p>
+                            <p class="text-3xl font-bold text-gray-900">127</p>
+                        </div>
+                        <div class="bg-blue-100 p-3 rounded-lg">
+                            <i data-lucide="package" class="text-blue-600 w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm">
+                        <i data-lucide="trending-up" class="text-green-500 mr-1 w-4 h-4"></i>
+                        <span class="text-green-500">+12%</span>
+                        <span class="text-gray-600 ml-1">vs. letzter Monat</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">Compliance Rate</p>
+                            <p class="text-3xl font-bold text-gray-900">94%</p>
+                        </div>
+                        <div class="bg-green-100 p-3 rounded-lg">
+                            <i data-lucide="shield" class="text-green-600 w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm">
+                        <i data-lucide="check-circle" class="text-green-500 mr-1 w-4 h-4"></i>
+                        <span class="text-green-500">ESPR konform</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">QR-Codes generiert</p>
+                            <p class="text-3xl font-bold text-gray-900">284</p>
+                        </div>
+                        <div class="bg-purple-100 p-3 rounded-lg">
+                            <i data-lucide="qr-code" class="text-purple-600 w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm">
+                        <i data-lucide="zap" class="text-blue-500 mr-1 w-4 h-4"></i>
+                        <span class="text-blue-500">Durchschnitt 2.1 pro DPP</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">Durchschn. Erstellung</p>
+                            <p class="text-3xl font-bold text-gray-900">12min</p>
+                        </div>
+                        <div class="bg-orange-100 p-3 rounded-lg">
+                            <i data-lucide="clock" class="text-orange-600 w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm">
+                        <i data-lucide="star" class="text-green-500 mr-1 w-4 h-4"></i>
+                        <span class="text-green-500">Unter 15min Ziel</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Letzte DPPs</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-900">BMW X5 xDrive40i</p>
+                                <p class="text-sm text-gray-600">BMW-X5-2024-001</p>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800">
+                                    <span class="mr-2">✓</span>
+                                    <span class="font-medium">ESPR Konform</span>
+                                    <span class="ml-2 text-sm">(94%)</span>
+                                </span>
+                                <button class="text-blue-600 hover:text-blue-700">
+                                    <i data-lucide="eye" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-900">Siemens Waschmaschine WM14T790</p>
+                                <p class="text-sm text-gray-600">SIEMENS-WM14T790</p>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full bg-yellow-100 text-yellow-800">
+                                    <span class="mr-2">⏳</span>
+                                    <span class="font-medium">Wird validiert...</span>
+                                    <span class="ml-2 text-sm">(87%)</span>
+                                </span>
+                                <button class="text-blue-600 hover:text-blue-700">
+                                    <i data-lucide="eye" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">ESPR Compliance Übersicht</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Vollständig konform</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-32 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 78%"></div>
+                                </div>
+                                <span class="text-sm font-medium">78%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">In Validierung</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-32 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 16%"></div>
+                                </div>
+                                <span class="text-sm font-medium">16%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Entwürfe</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-32 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-gray-500 h-2 rounded-full" style="width: 6%"></div>
+                                </div>
+                                <span class="text-sm font-medium">6%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Bereit für die nächste Stufe?</h3>
+                        <p class="text-blue-100 mb-4">Upgraden Sie auf Professional für erweiterte Features und API-Zugang</p>
+                        <button class="bg-white text-blue-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100">
+                            Upgrade durchführen
+                        </button>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-3xl font-bold">€899</div>
+                        <div class="text-blue-100">pro Monat</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products View -->
+        <div id="products-view" class="p-6 space-y-6 hidden">
+            <div class="flex items-center justify-between">
+                <h2 class="text-3xl font-bold text-gray-900">Produkte & DPPs</h2>
+                <div class="flex items-center space-x-3">
+                    <div class="relative">
+                        <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+                        <input type="text" placeholder="Produkte suchen..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <button class="p-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                        <i data-lucide="filter" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="showView('wizard')" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center space-x-2">
+                        <i data-lucide="plus" class="w-5 h-5"></i>
+                        <span>Neuer DPP</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-gray-900">Alle Produkte</h3>
+                        <div class="flex items-center space-x-2 text-sm text-gray-600">
+                            <span>3 Produkte</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Produkt</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategorie</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Erstellt</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aktionen</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900">BMW X5 xDrive40i</div>
+                                        <div class="text-sm text-gray-500">BMW-X5-2024-001</div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800">
+                                        <span class="mr-2">✓</span>
+                                        <span class="font-medium">ESPR Konform</span>
+                                        <span class="ml-2 text-sm">(94%)</span>
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Fahrzeug</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">15.01.2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <div class="flex items-center space-x-2">
+                                        <button class="text-blue-600 hover:text-blue-900">
+                                            <i data-lucide="eye" class="w-4 h-4"></i>
+                                        </button>
+                                        <button class="text-green-600 hover:text-green-900">
+                                            <i data-lucide="qr-code" class="w-4 h-4"></i>
+                                        </button>
+                                        <button class="text-gray-600 hover:text-gray-900">
+                                            <i data-lucide="download" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div>
+                                        <div class="text-sm font-medium text-gray-900">Siemens Waschmaschine WM14T790</div>
+                                        <div class="text-sm text-gray-500">SIEMENS-WM14T790</div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full bg-yellow-100 text-yellow-800">
+                                        <span class="mr-2">⏳</span>
+                                        <span class="font-medium">Wird validiert...</span>
+                                        <span class="ml-2 text-sm">(87%)</span>
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Haushaltsgerät</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">20.01.2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <div class="flex items-center space-x-2">
+                                        <button class="text-blue-600 hover:text-blue-900">
+                                            <i data-lucide="eye" class="w-4 h-4"></i>
+                                        </button>
+                                        <button class="text-green-600 hover:text-green-900">
+                                            <i data-lucide="qr-code" class="w-4 h-4"></i>
+                                        </button>
+                                        <button class="text-gray-600 hover:text-gray-900">
+                                            <i data-lucide="download" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wizard View -->
+        <div id="wizard-view" class="max-w-4xl mx-auto p-6 hidden">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">DPP-Erstellungsassistent</h2>
+                <p class="text-gray-600">Erstellen Sie Ihren ESPR-konformen Digital Product Passport in unter 15 Minuten</p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border p-8">
+                <!-- Progress Steps -->
+                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center text-blue-600">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center border-2 bg-blue-500 border-blue-500 text-white">1</div>
+                            <div class="w-24 h-1 mx-4 bg-blue-500"></div>
+                        </div>
+                        <div class="flex items-center text-blue-600">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center border-2 bg-blue-500 border-blue-500 text-white">2</div>
+                            <div class="w-24 h-1 mx-4 bg-blue-500"></div>
+                        </div>
+                        <div class="flex items-center text-blue-600">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center border-2 bg-blue-500 border-blue-500 text-white">3</div>
+                            <div class="w-24 h-1 mx-4 bg-blue-500"></div>
+                        </div>
+                        <div class="flex items-center text-blue-600">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center border-2 bg-blue-500 border-blue-500 text-white">4</div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-semibold text-gray-900">Grunddaten</h3>
+                        <p class="text-gray-600">Geschätzte Zeit: 2 min</p>
+                    </div>
+                </div>
+
+                <!-- Form Content -->
+                <div class="min-h-[400px]">
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Produkt-ID*</label>
+                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="z.B. BMW-X5-2024-001">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Produktname*</label>
+                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="z.B. BMW X5 xDrive40i">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Hersteller*</label>
+                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="z.B. BMW AG">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Modell*</label>
+                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="z.B. X5">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Kategorie*</label>
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option value="">Kategorie wählen</option>
+                                    <option value="Fahrzeug">Fahrzeug</option>
+                                    <option value="Haushaltsgerät">Haushaltsgerät</option>
+                                    <option value="Elektronik">Elektronik</option>
+                                    <option value="Textilien">Textilien</option>
+                                    <option value="Möbel">Möbel</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Herstellungsdatum*</label>
+                                <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between pt-8 border-t border-gray-200">
+                    <button class="px-6 py-2 text-gray-600 disabled:opacity-50 disabled:cursor-not-allowed hover:text-gray-800" disabled>
+                        Zurück
+                    </button>
+                    <button class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center space-x-2">
+                        <span>Weiter</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Navigation functionality
+        function showView(view) {
+            // Hide all views
+            document.getElementById('dashboard-view').classList.add('hidden');
+            document.getElementById('products-view').classList.add('hidden');
+            document.getElementById('wizard-view').classList.add('hidden');
+
+            // Show selected view
+            document.getElementById(view + '-view').classList.remove('hidden');
+
+            // Update navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Add CSS for navigation buttons
+        const style = document.createElement('style');
+        style.textContent = `
+            .nav-btn {
+                padding: 0.75rem 1rem;
+                border-radius: 0.375rem;
+                color: #6b7280;
+                transition: all 0.2s;
+            }
+            .nav-btn:hover {
+                color: #111827;
+            }
+            .nav-btn.active {
+                background-color: #dbeafe;
+                color: #1d4ed8;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html> 
